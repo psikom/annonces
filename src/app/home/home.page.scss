@@ -1,27 +1,64 @@
-#container {
+/* Add this to your global styles or component-specific styles */
+
+
+ion-thumbnail {
+  width        : 100%;
+  max-width    : 300px;
+  height       : 300px;
+  /* Set a fixed height for better control */
+  margin       : 0 auto;
+  border-radius: 8px;
+  /* Add rounded corners */
+  box-shadow   : 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Add a subtle shadow */
+  overflow     : hidden;
+  /* Ensure the image does not exceed the container */
+}
+
+
+ion-card {
+  width    : 100%;
+  max-width: 500px;
+  /* Adjust the max-width as needed */
+  margin   : 20px auto;
+  /* Adjust the margin as needed */
+}
+
+ion-card-content {
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  /* Center the content */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-card-title {
+  font-size: 1.5em;
+  /* Adjust the font size as needed */
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+ion-button {
+  display: block;
+  margin : 10px auto;
+  /* Center the button */
 }
 
-#container a {
-  text-decoration: none;
+
+ion-buttons {
+  display        : flex;
+  justify-content: space-around;
+  margin-top     : 10px;
+}
+
+ion-button {
+  transition   : all 0.3s ease;
+  /* Add smooth transition */
+  border-radius: 15px;
+  /* Add border-radius */
+}
+
+ion-button.selected {
+  background-color: #7e5adf;
+  /* Change the color to your preference */
+  color           : #fff;
+  /* Change the color to your preference */
+  transform       : scale(0.9);
+  /* Reduce size when selected */
 }

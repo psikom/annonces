@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      User Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card *ngIf="authenticatedUser">
+    <ion-card-header>
+      <ion-card-title>{{ authenticatedUser.fullName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Email: {{ authenticatedUser.email }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list *ngIf="userAnnonces$ | async as userAnnonces; else loading">
+    <ion-item *ngFor="let annonce of userAnnonces">
+      <ion-thumbnail slot="start">
+        <img [src]="'assets/img/' + annonce.img" alt="Annonce Image">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ annonce.titel }}</h2>
+        <p>{{ annonce.description }}</p>
+        <ion-button (click)="updateAnnonce(annonce.id)">Update</ion-button>
+        <ion-button (click)="deleteAnnonce(annonce.id)">Delete</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #loading>
+    <ion-spinner name="crescent"></ion-spinner>
+  </ng-template>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addAnnonce()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

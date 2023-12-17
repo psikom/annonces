@@ -1,20 +1,49 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-searchbar (ionInput)="filterAnnonces($event)"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!authenticatedUser" routerLink="/login">
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="authenticatedUser" routerLink="/profil">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-buttons>
+    <ion-button (click)="filterByCategory('all')" [class.selected]="selectedCategory === 'all'">
+      All
+    </ion-button>
+    <ion-button (click)="filterByCategory('houses')" [class.selected]="selectedCategory === 'houses'">
+      Houses
+    </ion-button>
+    <ion-button (click)="filterByCategory('garden')" [class.selected]="selectedCategory === 'garden'">
+      Garden
+    </ion-button>
+  </ion-buttons>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+
+  <ion-list *ngIf="filteredAnnonces && filteredAnnonces.length > 0">
+    <ion-item *ngFor="let annonce of filteredAnnonces">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ annonce.titel }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-thumbnail>
+            <img [src]="'assets/img/' + annonce.img" alt="Annonce Image">
+          </ion-thumbnail>
+          <p>{{ annonce.description }}</p>
+          <ion-button (click)="toggleExpand(annonce.id)">MORE</ion-button>
+          <div *ngIf="expandedAnnonceId === annonce.id">
+            <p>Price: {{ annonce.price }}</p>
+            <p>Category: {{ annonce.category }}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 </ion-content>
